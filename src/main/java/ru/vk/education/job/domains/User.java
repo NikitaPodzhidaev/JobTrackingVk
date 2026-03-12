@@ -1,20 +1,28 @@
 package ru.vk.education.job.domains;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
-    private String name;
-    private ArrayList<String> skills;
-    private int experience;
+    private final String name;
+    private final List<String> skills;
+    private final int experience;
 
-    public User(String name, ArrayList<String> skills, int experience){
+    public User(String name, List<String> skills, int experience){
         this.name = name;
         this.skills = skills;
         this.experience = experience;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public List<String> getSkills() {
+        return skills;
+    }
 
-
+    public int getExperience() {
+        return experience;
+    }
 }
