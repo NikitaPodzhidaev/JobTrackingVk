@@ -17,14 +17,12 @@ public class CommandLineParser implements ArgumentParser {
 
     private ParsedCommand parseCommandLine() {
         String line = scanner.nextLine().trim();
-        System.out.println("[DEBUG] Input line: '" + line + "'");
 
         if (line.isEmpty()) {
             throw new IllegalArgumentException("Команда не введена");
         }
 
         String[] splitScannerLine = line.split("\\s+");
-        System.out.println("[DEBUG] Split line: " + Arrays.toString(splitScannerLine));
 
         Command command;
         try {
