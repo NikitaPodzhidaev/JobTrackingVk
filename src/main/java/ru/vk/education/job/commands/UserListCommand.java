@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserListCommand implements CommandStrategy {
-    private final static String USER_LIST_OUTPUT_PATTERN = "%s %s %d";
+    private final static String USER_LIST_OUTPUT_PATTERN = "%s %s %d\n";
     private final UserService userService;
 
     public UserListCommand(UserService userService) {

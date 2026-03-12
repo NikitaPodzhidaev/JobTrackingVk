@@ -14,6 +14,6 @@ public class JobCreatorCommand implements CommandStrategy{
 
     @Override
     public void execute(Map<String, String> options) {
-        System.out.println("выбрали команду джобкриейтййтйтйтйтйтйт");
+        jobService.addVacancy(options);
     }
 }

@@ -15,8 +15,12 @@ public class Main {
         ArgumentParser commandLineParser = new CommandLineParser();
 
         while(true){
-            ParsedCommand parsedCommand = commandLineParser.parseArguments();
-            commandExecutor.executeCommand(parsedCommand);
+            try {
+                ParsedCommand parsedCommand = commandLineParser.parseArguments();
+                commandExecutor.executeCommand(parsedCommand);
+            } catch (Exception e) {
+                e.printStackTrace();  // <-- ключевой момент
+            }
         }
 
     }

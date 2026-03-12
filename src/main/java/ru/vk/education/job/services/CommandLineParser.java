@@ -3,6 +3,7 @@ package ru.vk.education.job.services;
 import ru.vk.education.job.commands.Command;
 import ru.vk.education.job.commands.ParsedCommand;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,11 +15,31 @@ public class CommandLineParser implements ArgumentParser {
         return parseCommandLine();
     }
 
-    private ParsedCommand parseCommandLine(){
-        String[] splitScannerLine = scanner.nextLine().trim().split("\\s+");
-        checkCommand(splitScannerLine);
-        Command command = Command.from(splitScannerLine[0]);
-        Map<String, String> options = OptionsParser.parseOptions(splitScannerLine);
+    private ParsedCommand parseCommandLine() {
+        String line = scanner.nextLine().trim();
+        System.out.println("[DEBUG] Input line: '" + line + "'");
+
+        if (line.isEmpty()) {
+            throw new IllegalArgumentException("Команда не введена");
+        }
+
+        String[] splitScannerLine = line.split("\\s+");
+        System.out.println("[DEBUG] Split line: " + Arrays.toString(splitScannerLine));
+
+        Command command;
+        try {
+            command = Command.from(splitScannerLine[0]);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Команда '" + splitScannerLine[0] + "' не поддерживается");
+        }
+
+        Map<String, String> options;
+        try {
+            options = OptionsParser.parseOptions(splitScannerLine);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Ошибка парсинга опций: " + e.getMessage(), e);
+        }
+
         return new ParsedCommand(command, options);
     }
 
