@@ -1,6 +1,8 @@
 package ru.vk.education.job.commands;
 
+import ru.vk.education.job.domains.User;
 import ru.vk.education.job.services.JobService;
+import ru.vk.education.job.services.MatchExecutor;
 import ru.vk.education.job.services.UserService;
 
 import java.util.Map;
@@ -18,6 +20,12 @@ public class SuggestCommand implements CommandStrategy {
 
     @Override
     public void execute(Map<String, String> options) {
-        System.out.println("выбрали команду суджест");
+        String username = options.get("name");
+        User user = userService.getUsers().stream()
+                .filter(u -> u.getName().equals(username))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+        MatchExecutor.executeMatch(user, jobService.getVacancies());
+
     }
 }

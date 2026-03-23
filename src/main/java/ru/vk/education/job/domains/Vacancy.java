@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Vacancy {
 
-    private String vacancyName;
-    private String company;
-    private List<String> tags;
-    private int experience;
+    private final String vacancyName;
+    private final String company;
+    private final List<String> tags;
+    private final int experience;
 
     public Vacancy(String vacancyName, String company, List<String> tags, int experience){
         this.vacancyName = vacancyName;

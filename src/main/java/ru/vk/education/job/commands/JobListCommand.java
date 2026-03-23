@@ -6,10 +6,11 @@ import ru.vk.education.job.services.JobService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class JobListCommand implements CommandStrategy {
 
-    private static final String JOB_LIST_OUT_PATTERN = "%s at %s\n";
+    public static final String JOB_LIST_OUT_PATTERN = "%s at %s\n";
 
 
     private final JobService jobService;
@@ -20,6 +21,13 @@ public class JobListCommand implements CommandStrategy {
     @Override
     public void execute(Map<String, String> options) {
         List<Vacancy> vacancies = jobService.getVacancies();
-        vacancies.forEach(vacancy -> System.out.printf(JOB_LIST_OUT_PATTERN, vacancy.getVacancyName(), vacancy.getCompany()));
+
+        vacancies.forEach(vacancy -> {
+            System.out.printf(
+                    JOB_LIST_OUT_PATTERN,
+                    vacancy.getVacancyName(),
+                    vacancy.getCompany()
+            );
+        });
     }
 }

@@ -12,12 +12,19 @@ public class JobService {
 
     private final List<Vacancy> vacancies = new ArrayList<>();
 
-    public void addVacancy(Map<String, String> options){
-        String name = options.get("name");
+    public void addVacancy(Map<String, String> options) {
+        String vacancyName = options.get("name");
         String company = options.get("company");
         List<String> tags = Arrays.asList(options.get("tags").split(","));
         int exp = Integer.parseInt(options.get("exp"));
-        vacancies.add(new Vacancy(name, company, tags, exp));
+
+        for (Vacancy vacancy : vacancies) {
+            if (vacancy.getVacancyName().equals(vacancyName)) {
+                return;
+            }
+        }
+
+        vacancies.add(new Vacancy(vacancyName, company, tags, exp));
     }
 
     public List<Vacancy> getVacancies() {

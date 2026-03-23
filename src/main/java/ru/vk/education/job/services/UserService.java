@@ -12,10 +12,17 @@ public class UserService {
 
     private final List<User> users = new ArrayList<>();
 
-    public void addUser(Map<String, String> options){
+    public void addUser(Map<String, String> options) {
         String name = options.get("name");
         List<String> skills = Arrays.asList(options.get("skills").split(","));
         int exp = Integer.parseInt(options.get("exp"));
+
+        for (User user : users) {
+            if (user.getName().equals(name)) {
+                return;
+            }
+        }
+
         users.add(new User(name, skills, exp));
     }
 
