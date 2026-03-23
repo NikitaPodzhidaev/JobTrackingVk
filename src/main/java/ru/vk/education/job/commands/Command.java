@@ -6,12 +6,11 @@ public enum Command {
     JOB,
     JOB_LIST,
     SUGGEST,
+    HISTORY,
     EXIT;
 
     public static Command from(String input) {
         return Command.valueOf(input.replace("-", "_").toUpperCase());
     }
-
-
 
 }
